@@ -53,6 +53,7 @@ public class SubscriptionService {
 
         User user = userRepository.findById(userId).get();
         Subscription subscription = user.getSubscription();
+        if(subscription == null) throw new Exception("Already the best Subscription");
         SubscriptionType oldType = subscription.getSubscriptionType();
         int difference = 0;
         if( oldType == SubscriptionType.ELITE) throw new Exception("Already the best Subscription");
