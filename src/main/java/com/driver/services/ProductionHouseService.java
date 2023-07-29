@@ -22,9 +22,9 @@ public class ProductionHouseService {
         productionHouse.setWebSeriesList(new ArrayList<>());
         productionHouse.setRatings(0);
 
-        productionHouseRepository.save(productionHouse);
+        productionHouse = productionHouseRepository.save(productionHouse);
 
-        return  0;
+        return  productionHouse.getId();
     }
 
 
