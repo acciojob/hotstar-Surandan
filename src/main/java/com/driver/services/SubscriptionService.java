@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SubscriptionService {
@@ -52,14 +53,13 @@ public class SubscriptionService {
         //update the subscription in the repository
 
         User user = userRepository.findById(userId).get();
+        if( user.getSubscription().getSubscriptionType().toString().equals("ELITE")) throw new Exception("Already the best Subscription");
+
         Subscription subscription = user.getSubscription();
-
-
-
 
         SubscriptionType oldType = subscription.getSubscriptionType();
         int difference = 0;
-        if( oldType.toString().equals("ELITE")) throw new Exception("Already the best Subscription");
+//        if( oldType.toString().equals("ELITE")) throw new Exception("Already the best Subscription");
 
         if(oldType.toString().equals("BASIC")) {
             subscription.setSubscriptionType(SubscriptionType.PRO);
@@ -84,7 +84,9 @@ public class SubscriptionService {
         //Hint is to use findAll function from the SubscriptionDb
 
         int revenue = 0;
-        for(Subscription subscription : subscriptionRepository.findAll()) {
+        List<Subscription> subscriptionList = subscriptionRepository.findAll();
+        for(Subscription subscription : subscriptionList) {
+
             revenue += subscription.getTotalAmountPaid();
         }
         return revenue;
