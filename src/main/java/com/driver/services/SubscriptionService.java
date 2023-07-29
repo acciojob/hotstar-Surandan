@@ -74,6 +74,7 @@ public class SubscriptionService {
             subscription.setTotalAmountPaid(newAmount);
         }
 
+        user.setSubscription(subscription);
         subscriptionRepository.save(subscription);
         return difference;
     }
