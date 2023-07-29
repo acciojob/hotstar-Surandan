@@ -23,6 +23,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.OngoingStubbing;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -38,5 +43,17 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class TestCases {
+
+    WebSeriesService webSeriesService = new WebSeriesService();
+
+    @Test
+    public void addWebs() throws Exception {
+
+        WebSeriesEntryDto webSeriesEntryDto = new WebSeriesEntryDto("Mirzapur",14,9.2,SubscriptionType.PRO,3);
+
+        WebSeries actual = webSeriesService.addWebSeries(webSeriesEntryDto);
+
+       assertEquals(14,actual.getAgeLimit());
+    }
 
 }
