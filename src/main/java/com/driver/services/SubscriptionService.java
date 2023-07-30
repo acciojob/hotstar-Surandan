@@ -58,18 +58,18 @@ public class SubscriptionService {
         Subscription subscription = user.getSubscription();
 
         SubscriptionType oldType = subscription.getSubscriptionType();
-        int difference = 0;
+        Integer difference = 0;
 //        if( oldType.toString().equals("ELITE")) throw new Exception("Already the best Subscription");
 
         if(oldType.toString().equals("BASIC")) {
             subscription.setSubscriptionType(SubscriptionType.PRO);
-            int newAmount = 800 + 250 * subscription.getNoOfScreensSubscribed();
+            Integer newAmount = 800 + 250 * subscription.getNoOfScreensSubscribed();
             difference = ( newAmount- subscription.getTotalAmountPaid());
             subscription.setTotalAmountPaid(newAmount);
         }
         else {
             subscription.setSubscriptionType(SubscriptionType.ELITE);
-            int newAmount = 1000 + 350 * subscription.getNoOfScreensSubscribed();
+            Integer newAmount = 1000 + 350 * subscription.getNoOfScreensSubscribed();
             difference = ( newAmount- subscription.getTotalAmountPaid());
             subscription.setTotalAmountPaid(newAmount);
         }
@@ -84,7 +84,7 @@ public class SubscriptionService {
         //We need to find out total Revenue of hotstar : from all the subscriptions combined
         //Hint is to use findAll function from the SubscriptionDb
 
-        int revenue = 0;
+        Integer revenue = 0;
         List<Subscription> subscriptionList = subscriptionRepository.findAll();
         for(Subscription subscription : subscriptionList) {
 
